@@ -1,0 +1,11 @@
+Host_sp;measurement_ID;nucleids;nucleids_ST;mean;mean_ST;CV;CV_ST;pg/2C;pg/2C_ST
+Festuca trilora;Ftrif8.5/Psativum;5508;5026;17845;20889;2,05;1,77;7,77;9,09
+Festuca trilora;Ftrif8.5/Psativum;5402;10391;19946;23036;1,99;2,15;7,87;9,09
+Festuca trilora;Ftrif8.6/Pisum1;9446;4688;35738;41019;2,17;1,61;7,92;9,09
+Festuca trilora;Ftrif8.6/Pisum2;5185;9900;38077;44092;2,35;1,88;7,85;9,09
+Festuca trilora;Ftrif8.9/Pisum1;13727;5030;39116;44622;2,92;2,36;7,97;9,09
+Festuca trilora;Ftrif8.9/Pisum2;13760;5036;37304;42557;2,63;1,94;7,97;9,09
+Festuca trilora;Ftrif8.12/Pisum1;5542;6304;37480;43390;2,13;1,77;7,85;9,09
+Festuca trilora;Ftrif8.12/Pisum3;5045;9824;43505;50483;2,04;1,92;7,83;9,09
+Festuca trilora;Ftrif8.2/Pisum1;10979;5426;41726;46986;2,62;1,8;8,07;9,09
+Festuca trilora;Ftrif8.2/Pisum2;10000;5058;42299;47554;2,49;1,71;8,09;9,09
