@@ -35,7 +35,7 @@ FtrifloraEpichloe/
 │   │   │                                      Variables: IndID (measurement identification code);
 │   │   │                                      Ind (short name for each isolate);
 │   │   │                                      Rep (replicate code within each isolate);
-│   │   │                                      Day (Day the measurement was made);
+│   │   │                                      Day (day the measurement was made);
 │   │   │                                      Diameter (diameter of the culture in mm)
 │   │   │                                      Species (holobiont identification code).
 │   │   │ 
