@@ -1,0 +1,853 @@
+===================
+Linear Mixed Models
+===================
+
+
+=====================
+Variable: conidL 
+=====================
+
+Selected model (R code):
+m <- lmer(conidL ~ Species + (1 | Ind/Rep),
+          data = spores_pairwise, REML = TRUE, control = ctrl)
+Model type: FULL MODEL 
+isSingular(full)  = FALSE 
+isSingular(final) = FALSE 
+
+
+----- MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full
+   Data: spores_pairwise
+Control: ctrl
+
+REML criterion at convergence: 514.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6612 -0.6971  0.0685  0.6443  3.3543 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Rep:Ind  (Intercept) 0.005283 0.07268 
+ Ind      (Intercept) 0.072489 0.26924 
+ Residual             0.163414 0.40425 
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)   4.30709    0.16299 10.00000  26.425 1.39e-10 ***
+SpeciesFroth -0.03443    0.23050 10.00000  -0.149   0.8842    
+SpeciesFnigr  0.02702    0.23050 10.00000   0.117   0.9090    
+SpeciesFprui  0.67924    0.23050 10.00000   2.947   0.0146 *  
+SpeciesFtrif -0.11427    0.23050 10.00000  -0.496   0.6308    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+
+----- MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise
+Models:
+m_null: f_null
+update(m_final, REML = FALSE): f_full
+                              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)   
+m_null                           4 526.55 542.98 -259.27    518.55                        
+update(m_final, REML = FALSE)    8 520.45 553.33 -252.23    504.45 14.094  4      0.007 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.496
+     Marginal R2: 0.256
+
+
+
+----- ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+OK: Error variance appears to be homoscedastic (p = 0.678).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+
+----- RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final)
+W = 0.99382, p-value = 0.0638
+
+
+
+
+----- ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+        Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)  
+Species 2.5477 0.63692     4    10  3.8976 0.03687 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate    SE df t.ratio p.value
+ Fyves - Froth   0.0344 0.231 10   0.149  0.9999
+ Fyves - Fnigr  -0.0270 0.231 10  -0.117  0.9999
+ Fyves - Fprui  -0.6792 0.231 10  -2.947  0.0851
+ Fyves - Ftrif   0.1143 0.231 10   0.496  0.9860
+ Froth - Fnigr  -0.0615 0.231 10  -0.267  0.9987
+ Froth - Fprui  -0.7137 0.231 10  -3.096  0.0676
+ Froth - Ftrif   0.0798 0.231 10   0.346  0.9964
+ Fnigr - Fprui  -0.6522 0.231 10  -2.830  0.1018
+ Fnigr - Ftrif   0.1413 0.231 10   0.613  0.9697
+ Fprui - Ftrif   0.7935 0.231 10   3.443  0.0395
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- COMPACT LETTER DISPLAY -----
+ Species   emmean        SE df lower.CL upper.CL .group
+ Fyves   4.307089 0.1629902 10 3.943924 4.670254  ab   
+ Froth   4.272656 0.1629902 10 3.909491 4.635820  ab   
+ Fnigr   4.334111 0.1629902 10 3.970946 4.697276  ab   
+ Fprui   4.986333 0.1629902 10 4.623168 5.349498  a    
+ Ftrif   4.192822 0.1629902 10 3.829657 4.555987   b   
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth      0.0852 0.570 10   -1.185    1.356
+ Fyves - Fnigr     -0.0668 0.570 10   -1.337    1.204
+ Fyves - Fprui     -1.6803 0.573 10   -2.957   -0.404
+ Fyves - Ftrif      0.2827 0.570 10   -0.988    1.553
+ Froth - Fnigr     -0.1520 0.570 10   -1.423    1.119
+ Froth - Fprui     -1.7655 0.573 10   -3.043   -0.488
+ Froth - Ftrif      0.1975 0.570 10   -1.073    1.468
+ Fnigr - Fprui     -1.6134 0.573 10   -2.890   -0.337
+ Fnigr - Ftrif      0.3495 0.570 10   -0.921    1.620
+ Fprui - Ftrif      1.9629 0.574 10    0.684    3.242
+
+sigma used for effect sizes: 0.4042 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- VARIANCE COMPONENTS & PROPORTIONS -----
+
+Level          Variance   Proportion
+-----          --------   ----------
+Ind            0.072489        0.301
+Residual       0.163414        0.678
+Rep:Ind        0.005283        0.022
+
+
+
+
+Diagnostics plot failed for conidL : objeto 'out_dir_stats' no encontrado 
+
+=====================
+Variable: conidW 
+=====================
+
+Selected model (R code):
+m <- lmer(conidW ~ Species + (1 | Ind/Rep),
+          data = spores_pairwise, REML = TRUE, control = ctrl)
+Model type: FULL MODEL 
+isSingular(full)  = FALSE 
+isSingular(final) = FALSE 
+
+
+----- MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full
+   Data: spores_pairwise
+Control: ctrl
+
+REML criterion at convergence: -342.8
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-3.01929 -0.69342  0.00864  0.70725  2.97723 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ Rep:Ind  (Intercept) 0.0026320 0.05130 
+ Ind      (Intercept) 0.0007347 0.02711 
+ Residual             0.0239061 0.15462 
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)   2.10314    0.02834 10.00000  74.220 4.81e-15 ***
+SpeciesFroth -0.05469    0.04007 10.00000  -1.365  0.20227    
+SpeciesFnigr -0.16109    0.04007 10.00000  -4.020  0.00244 ** 
+SpeciesFprui -0.02256    0.04007 10.00000  -0.563  0.58594    
+SpeciesFtrif -0.14817    0.04007 10.00000  -3.697  0.00413 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+
+----- MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise
+Models:
+m_null: f_null
+update(m_final, REML = FALSE): f_full
+                              npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+m_null                           4 -342.75 -326.32 175.38   -350.75                         
+update(m_final, REML = FALSE)    8 -354.29 -321.42 185.15   -370.29 19.538  4  0.0006158 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.243
+     Marginal R2: 0.137
+
+
+
+----- ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+Warning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+
+----- RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final)
+W = 0.99639, p-value = 0.4065
+
+
+
+
+----- ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+         Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)   
+Species 0.64088 0.16022     4    10  6.7021 0.00687 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate     SE df t.ratio p.value
+ Fyves - Froth   0.0547 0.0401 10   1.365  0.6611
+ Fyves - Fnigr   0.1611 0.0401 10   4.020  0.0162
+ Fyves - Fprui   0.0226 0.0401 10   0.563  0.9777
+ Fyves - Ftrif   0.1482 0.0401 10   3.697  0.0266
+ Froth - Fnigr   0.1064 0.0401 10   2.655  0.1324
+ Froth - Fprui  -0.0321 0.0401 10  -0.802  0.9242
+ Froth - Ftrif   0.0935 0.0401 10   2.333  0.2116
+ Fnigr - Fprui  -0.1385 0.0401 10  -3.457  0.0386
+ Fnigr - Ftrif  -0.0129 0.0401 10  -0.322  0.9973
+ Fprui - Ftrif   0.1256 0.0401 10   3.134  0.0637
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- COMPACT LETTER DISPLAY -----
+ Species   emmean         SE df lower.CL upper.CL .group
+ Fyves   2.103144 0.02833671 10 2.040006 2.166283  a    
+ Froth   2.048456 0.02833671 10 1.985317 2.111594  abc  
+ Fnigr   1.942056 0.02833671 10 1.878917 2.005194   b   
+ Fprui   2.080589 0.02833671 10 2.017451 2.143727  a c  
+ Ftrif   1.954978 0.02833671 10 1.891840 2.018116   bc  
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth      0.3537 0.259 10  -0.2244    0.932
+ Fyves - Fnigr      1.0419 0.262 10   0.4591    1.625
+ Fyves - Fprui      0.1459 0.259 10  -0.4317    0.723
+ Fyves - Ftrif      0.9583 0.261 10   0.3763    1.540
+ Froth - Fnigr      0.6882 0.260 10   0.1084    1.268
+ Froth - Fprui     -0.2078 0.259 10  -0.7855    0.370
+ Froth - Ftrif      0.6046 0.260 10   0.0253    1.184
+ Fnigr - Fprui     -0.8960 0.261 10  -1.4774   -0.315
+ Fnigr - Ftrif     -0.0836 0.259 10  -0.6611    0.494
+ Fprui - Ftrif      0.8124 0.261 10   0.2317    1.393
+
+sigma used for effect sizes: 0.1546 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- VARIANCE COMPONENTS & PROPORTIONS -----
+
+Level          Variance   Proportion
+-----          --------   ----------
+Ind            0.000735        0.027
+Residual       0.023906        0.877
+Rep:Ind        0.002632        0.097
+
+
+
+
+Diagnostics plot failed for conidW : objeto 'out_dir_stats' no encontrado 
+
+=====================
+Variable: conidA 
+=====================
+
+Selected model (R code):
+m <- lmer(conidA ~ Species + (1 | Ind/Rep),
+          data = spores_pairwise, REML = TRUE, control = ctrl)
+Model type: FULL MODEL 
+isSingular(full)  = FALSE 
+isSingular(final) = FALSE 
+
+
+----- MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full
+   Data: spores_pairwise
+Control: ctrl
+
+REML criterion at convergence: 1288.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4609 -0.6690 -0.0229  0.6355  3.3485 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Rep:Ind  (Intercept) 0.05748  0.2398  
+ Ind      (Intercept) 0.16215  0.4027  
+ Residual             0.93371  0.9663  
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error      df t value Pr(>|t|)    
+(Intercept)    7.3865     0.2661 10.0000  27.758 8.54e-11 ***
+SpeciesFroth  -0.5336     0.3763 10.0000  -1.418  0.18660    
+SpeciesFnigr  -0.7919     0.3763 10.0000  -2.104  0.06165 .  
+SpeciesFprui   1.2106     0.3763 10.0000   3.217  0.00922 ** 
+SpeciesFtrif  -0.7987     0.3763 10.0000  -2.122  0.05978 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+
+----- MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise
+Models:
+m_null: f_null
+update(m_final, REML = FALSE): f_full
+                              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+m_null                           4 1315.5 1332.0 -653.75    1307.5                         
+update(m_final, REML = FALSE)    8 1299.3 1332.2 -641.65    1283.3 24.209  4  7.255e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.458
+     Marginal R2: 0.331
+
+
+
+----- ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+OK: Error variance appears to be homoscedastic (p = 0.823).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+
+----- RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final)
+W = 0.99452, p-value = 0.1079
+
+
+
+
+----- ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+        Sum Sq Mean Sq NumDF DenDF F value   Pr(>F)   
+Species 37.557  9.3893     4    10  10.056 0.001566 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate    SE df t.ratio p.value
+ Fyves - Froth  0.53362 0.376 10   1.418  0.6310
+ Fyves - Fnigr  0.79186 0.376 10   2.104  0.2895
+ Fyves - Fprui -1.21059 0.376 10  -3.217  0.0561
+ Fyves - Ftrif  0.79872 0.376 10   2.122  0.2826
+ Froth - Fnigr  0.25823 0.376 10   0.686  0.9550
+ Froth - Fprui -1.74421 0.376 10  -4.635  0.0064
+ Froth - Ftrif  0.26510 0.376 10   0.704  0.9508
+ Fnigr - Fprui -2.00244 0.376 10  -5.321  0.0024
+ Fnigr - Ftrif  0.00687 0.376 10   0.018  1.0000
+ Fprui - Ftrif  2.00931 0.376 10   5.339  0.0024
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- COMPACT LETTER DISPLAY -----
+ Species   emmean        SE df lower.CL upper.CL .group
+ Fyves   7.386467 0.2661065 10 6.793544 7.979389  ab   
+ Froth   6.852844 0.2661065 10 6.259922 7.445767  a    
+ Fnigr   6.594611 0.2661065 10 6.001689 7.187533  a    
+ Fprui   8.597056 0.2661065 10 8.004133 9.189978   b   
+ Ftrif   6.587744 0.2661065 10 5.994822 7.180667  a    
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth     0.55224 0.390 10  -0.3165    1.421
+ Fyves - Fnigr     0.81948 0.390 10  -0.0505    1.689
+ Fyves - Fprui    -1.25283 0.392 10  -2.1257   -0.380
+ Fyves - Ftrif     0.82659 0.390 10  -0.0434    1.697
+ Froth - Fnigr     0.26724 0.390 10  -0.6008    1.135
+ Froth - Fprui    -1.80507 0.394 10  -2.6833   -0.927
+ Froth - Ftrif     0.27435 0.390 10  -0.5937    1.142
+ Fnigr - Fprui    -2.07231 0.396 10  -2.9539   -1.191
+ Fnigr - Ftrif     0.00711 0.389 10  -0.8607    0.875
+ Fprui - Ftrif     2.07941 0.396 10   1.1978    2.961
+
+sigma used for effect sizes: 0.9663 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- VARIANCE COMPONENTS & PROPORTIONS -----
+
+Level          Variance   Proportion
+-----          --------   ----------
+Ind            0.162154        0.141
+Residual       0.933710        0.810
+Rep:Ind        0.057483        0.050
+
+
+
+
+Diagnostics plot failed for conidA : objeto 'out_dir_stats' no encontrado 
+
+=====================
+Variable: conidiogL 
+=====================
+
+Selected model (R code):
+m <- lmer(conidiogL ~ Species + (1 | Ind/Rep),
+          data = spores_pairwise, REML = TRUE, control = ctrl)
+Model type: FULL MODEL 
+isSingular(full)  = FALSE 
+isSingular(final) = FALSE 
+
+
+----- MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full
+   Data: spores_pairwise
+Control: ctrl
+
+REML criterion at convergence: 2069.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.9311 -0.6428 -0.1129  0.5649  4.0179 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Rep:Ind  (Intercept) 1.023    1.012   
+ Ind      (Intercept) 2.207    1.486   
+ Residual             5.085    2.255   
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error      df t value Pr(>|t|)    
+(Intercept)   14.2187     0.9518 10.0000  14.939 3.64e-08 ***
+SpeciesFroth  -1.2219     1.3460 10.0000  -0.908    0.385    
+SpeciesFnigr  -3.5452     1.3460 10.0000  -2.634    0.025 *  
+SpeciesFprui  -0.2996     1.3460 10.0000  -0.223    0.828    
+SpeciesFtrif  -2.3426     1.3460 10.0000  -1.740    0.112    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+
+----- MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise
+Models:
+m_null: f_null
+update(m_final, REML = FALSE): f_full
+                              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)  
+m_null                           4 2095.5 2112.0 -1043.8    2087.5                       
+update(m_final, REML = FALSE)    8 2093.5 2126.4 -1038.7    2077.5 10.063  4    0.03938 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.494
+     Marginal R2: 0.173
+
+
+
+----- ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+Warning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+
+----- RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final)
+W = 0.97523, p-value = 6.301e-07
+
+
+
+
+----- ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+        Sum Sq Mean Sq NumDF DenDF F value Pr(>F)
+Species 48.609  12.152     4    10  2.3899 0.1203
+
+
+
+----- PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate   SE df t.ratio p.value
+ Fyves - Froth    1.222 1.35 10   0.908  0.8876
+ Fyves - Fnigr    3.545 1.35 10   2.634  0.1366
+ Fyves - Fprui    0.300 1.35 10   0.223  0.9994
+ Fyves - Ftrif    2.343 1.35 10   1.740  0.4540
+ Froth - Fnigr    2.323 1.35 10   1.726  0.4614
+ Froth - Fprui   -0.922 1.35 10  -0.685  0.9553
+ Froth - Ftrif    1.121 1.35 10   0.833  0.9144
+ Fnigr - Fprui   -3.246 1.35 10  -2.411  0.1892
+ Fnigr - Ftrif   -1.203 1.35 10  -0.893  0.8930
+ Fprui - Ftrif    2.043 1.35 10   1.518  0.5745
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- COMPACT LETTER DISPLAY -----
+ Species   emmean        SE df  lower.CL upper.CL .group
+ Fyves   14.21872 0.9517652 10 12.098057 16.33939  a    
+ Froth   12.99683 0.9517652 10 10.876168 15.11750  a    
+ Fnigr   10.67352 0.9517652 10  8.552857 12.79419  a    
+ Fprui   13.91917 0.9517652 10 11.798502 16.03983  a    
+ Ftrif   11.87609 0.9517652 10  9.755424 13.99675  a    
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth       0.542 0.597 10   -0.789    1.872
+ Fyves - Fnigr       1.572 0.599 10    0.237    2.907
+ Fyves - Fprui       0.133 0.597 10   -1.197    1.463
+ Fyves - Ftrif       1.039 0.598 10   -0.293    2.371
+ Froth - Fnigr       1.030 0.598 10   -0.302    2.363
+ Froth - Fprui      -0.409 0.597 10   -1.739    0.921
+ Froth - Ftrif       0.497 0.597 10   -0.834    1.828
+ Fnigr - Fprui      -1.439 0.599 10   -2.774   -0.105
+ Fnigr - Ftrif      -0.533 0.597 10   -1.864    0.797
+ Fprui - Ftrif       0.906 0.598 10   -0.426    2.238
+
+sigma used for effect sizes: 2.255 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- VARIANCE COMPONENTS & PROPORTIONS -----
+
+Level          Variance   Proportion
+-----          --------   ----------
+Ind            2.206969        0.265
+Residual       5.084804        0.612
+Rep:Ind        1.023324        0.123
+
+
+
+
+Diagnostics plot failed for conidiogL : objeto 'out_dir_stats' no encontrado 
+
+=====================
+Variable: conidiogW 
+=====================
+
+Selected model (R code):
+m <- lmer(conidiogW ~ Species + (1 | Ind/Rep),
+          data = spores_pairwise, REML = TRUE, control = ctrl)
+Model type: FULL MODEL 
+isSingular(full)  = FALSE 
+isSingular(final) = FALSE 
+
+
+----- MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full
+   Data: spores_pairwise
+Control: ctrl
+
+REML criterion at convergence: 124.7
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.1745 -0.6366 -0.0637  0.6218  3.3420 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Rep:Ind  (Intercept) 0.018344 0.13544 
+ Ind      (Intercept) 0.001642 0.04053 
+ Residual             0.065039 0.25503 
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)   1.69418    0.05752 10.00000  29.455 4.75e-11 ***
+SpeciesFroth  0.13300    0.08134 10.00000   1.635    0.133    
+SpeciesFnigr -0.04696    0.08134 10.00000  -0.577    0.577    
+SpeciesFprui -0.10780    0.08134 10.00000  -1.325    0.215    
+SpeciesFtrif -0.05108    0.08134 10.00000  -0.628    0.544    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+
+----- MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise
+Models:
+m_null: f_null
+update(m_final, REML = FALSE): f_full
+                              npar    AIC    BIC  logLik -2*log(L)  Chisq Df Pr(>Chisq)  
+m_null                           4 122.64 139.08 -57.321    114.64                       
+update(m_final, REML = FALSE)    8 120.50 153.37 -52.248    104.50 10.147  4    0.03802 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+
+----- MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.290
+     Marginal R2: 0.072
+
+
+
+----- ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+OK: Error variance appears to be homoscedastic (p = 0.945).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+
+----- RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final)
+W = 0.98874, p-value = 0.001539
+
+
+
+
+----- ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+        Sum Sq Mean Sq NumDF DenDF F value Pr(>F)
+Species   0.65  0.1625     4    10  2.4985 0.1095
+
+
+
+----- PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate     SE df t.ratio p.value
+ Fyves - Froth -0.13300 0.0813 10  -1.635  0.5097
+ Fyves - Fnigr  0.04696 0.0813 10   0.577  0.9755
+ Fyves - Fprui  0.10780 0.0813 10   1.325  0.6832
+ Fyves - Ftrif  0.05108 0.0813 10   0.628  0.9670
+ Froth - Fnigr  0.17996 0.0813 10   2.212  0.2502
+ Froth - Fprui  0.24080 0.0813 10   2.960  0.0834
+ Froth - Ftrif  0.18408 0.0813 10   2.263  0.2333
+ Fnigr - Fprui  0.06084 0.0813 10   0.748  0.9397
+ Fnigr - Ftrif  0.00412 0.0813 10   0.051  1.0000
+ Fprui - Ftrif -0.05672 0.0813 10  -0.697  0.9525
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- COMPACT LETTER DISPLAY -----
+ Species   emmean         SE df lower.CL upper.CL .group
+ Fyves   1.694178 0.05751758 10 1.566021 1.822335  a    
+ Froth   1.827178 0.05751758 10 1.699021 1.955335  a    
+ Fnigr   1.647222 0.05751758 10 1.519065 1.775379  a    
+ Fprui   1.586378 0.05751758 10 1.458221 1.714535  a    
+ Ftrif   1.643100 0.05751758 10 1.514943 1.771257  a    
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth     -0.5215 0.319 10 -1.23326    0.190
+ Fyves - Fnigr      0.1841 0.319 10 -0.52669    0.895
+ Fyves - Fprui      0.4227 0.319 10 -0.28868    1.134
+ Fyves - Ftrif      0.2003 0.319 10 -0.51055    0.911
+ Froth - Fnigr      0.7056 0.320 10 -0.00701    1.418
+ Froth - Fprui      0.9442 0.321 10  0.23002    1.658
+ Froth - Ftrif      0.7218 0.320 10  0.00907    1.435
+ Fnigr - Fprui      0.2386 0.319 10 -0.47232    0.949
+ Fnigr - Ftrif      0.0162 0.319 10 -0.69451    0.727
+ Fprui - Ftrif     -0.2224 0.319 10 -0.93328    0.488
+
+sigma used for effect sizes: 0.255 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- VARIANCE COMPONENTS & PROPORTIONS -----
+
+Level          Variance   Proportion
+-----          --------   ----------
+Ind            0.001642        0.019
+Residual       0.065039        0.765
+Rep:Ind        0.018344        0.216
+
+
+
+
+Diagnostics plot failed for conidiogW : objeto 'out_dir_stats' no encontrado 
+========================
+End of LMM analysis
+========================

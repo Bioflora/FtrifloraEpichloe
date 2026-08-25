@@ -1,0 +1,341 @@
+=============================
+Log-scale sensitivity (LMM)
+=============================
+
+
+==============================
+Variable (log): conidW 
+==============================
+
+Transform used: log_conidW = log(conidW)  [min(conidW)=1.483000]
+
+Selected log model (R code):
+m_log <- lmer(log_conidW ~ Species + (1 | Ind/Rep),
+               data = spores_pairwise_log, REML = TRUE,
+               control = ctrl, na.action = na.omit)
+Model type: FULL MODEL (log) 
+isSingular(full_log)  = FALSE 
+isSingular(final_log) = FALSE 
+
+----- LOG MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full_log
+   Data: spores_pairwise_log
+Control: ctrl
+
+REML criterion at convergence: -957.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2082 -0.6538  0.0395  0.7260  2.5091 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.
+ Rep:Ind  (Intercept) 0.0006274 0.02505 
+ Ind      (Intercept) 0.0001948 0.01396 
+ Residual             0.0060114 0.07753 
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+              Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)   0.739986   0.014193 10.000000  52.137 1.63e-13 ***
+SpeciesFroth -0.026140   0.020072 10.000000  -1.302  0.22201    
+SpeciesFnigr -0.079884   0.020072 10.000000  -3.980  0.00260 ** 
+SpeciesFprui -0.009735   0.020072 10.000000  -0.485  0.63812    
+SpeciesFtrif -0.073312   0.020072 10.000000  -3.652  0.00444 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+----- LOG MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise_log
+Models:
+m_null_log: f_null_log
+update(m_final_log, REML = FALSE): f_full_log
+                                  npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(>Chisq)    
+m_null_log                           4 -964.87 -948.43 486.43   -972.87                         
+update(m_final_log, REML = FALSE)    8 -976.38 -943.51 496.19   -992.38 19.514  4  0.0006228 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+----- LOG MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.240
+     Marginal R2: 0.136
+
+
+----- LOG ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+Warning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+----- LOG RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final_log)
+W = 0.99166, p-value = 0.0125
+
+
+
+----- LOG ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+         Sum Sq Mean Sq NumDF DenDF F value   Pr(>F)   
+Species 0.16068 0.04017     4    10  6.6824 0.006939 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+----- LOG PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate     SE df t.ratio p.value
+ Fyves - Froth  0.02614 0.0201 10   1.302  0.6960
+ Fyves - Fnigr  0.07988 0.0201 10   3.980  0.0172
+ Fyves - Fprui  0.00974 0.0201 10   0.485  0.9871
+ Fyves - Ftrif  0.07331 0.0201 10   3.652  0.0285
+ Froth - Fnigr  0.05374 0.0201 10   2.678  0.1280
+ Froth - Fprui -0.01640 0.0201 10  -0.817  0.9193
+ Froth - Ftrif  0.04717 0.0201 10   2.350  0.2065
+ Fnigr - Fprui -0.07015 0.0201 10  -3.495  0.0364
+ Fnigr - Ftrif -0.00657 0.0201 10  -0.327  0.9971
+ Fprui - Ftrif  0.06358 0.0201 10   3.167  0.0606
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- LOG COMPACT LETTER DISPLAY -----
+ Species    emmean         SE df  lower.CL  upper.CL .group
+ Fyves   0.7399860 0.01419318 10 0.7083616 0.7716103  a    
+ Froth   0.7138458 0.01419318 10 0.6822215 0.7454702  abc  
+ Fnigr   0.6601022 0.01419318 10 0.6284778 0.6917266   b   
+ Fprui   0.7302507 0.01419318 10 0.6986264 0.7618751  a c  
+ Ftrif   0.6666742 0.01419318 10 0.6350498 0.6982985   bc  
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- LOG EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth      0.3371 0.259 10  -0.2402    0.915
+ Fyves - Fnigr      1.0303 0.261 10   0.4483    1.612
+ Fyves - Fprui      0.1256 0.259 10  -0.4513    0.702
+ Fyves - Ftrif      0.9456 0.261 10   0.3644    1.527
+ Froth - Fnigr      0.6932 0.260 10   0.1140    1.272
+ Froth - Fprui     -0.2116 0.259 10  -0.7886    0.365
+ Froth - Ftrif      0.6084 0.260 10   0.0298    1.187
+ Fnigr - Fprui     -0.9048 0.261 10  -1.4856   -0.324
+ Fnigr - Ftrif     -0.0848 0.259 10  -0.6616    0.492
+ Fprui - Ftrif      0.8200 0.260 10   0.2399    1.400
+
+sigma used for effect sizes: 0.07753 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- LOG ESTIMATED MARGINAL MEANS (emmeans) -----
+ Species emmean     SE df lower.CL upper.CL
+ Fyves    0.740 0.0142 10    0.708    0.772
+ Froth    0.714 0.0142 10    0.682    0.745
+ Fnigr    0.660 0.0142 10    0.628    0.692
+ Fprui    0.730 0.0142 10    0.699    0.762
+ Ftrif    0.667 0.0142 10    0.635    0.698
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+
+
+
+==============================
+Variable (log): conidiogL 
+==============================
+
+Transform used: log_conidiogL = log(conidiogL)  [min(conidiogL)=5.558000]
+
+Selected log model (R code):
+m_log <- lmer(log_conidiogL ~ Species + (1 | Ind/Rep),
+               data = spores_pairwise_log, REML = TRUE,
+               control = ctrl, na.action = na.omit)
+Model type: FULL MODEL (log) 
+isSingular(full_log)  = FALSE 
+isSingular(final_log) = FALSE 
+
+----- LOG MODEL SUMMARY -----
+Linear mixed model fit by REML. t-tests use Satterthwaite's method ['lmerModLmerTest']
+Formula: f_full_log
+   Data: spores_pairwise_log
+Control: ctrl
+
+REML criterion at convergence: -209.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.8069 -0.6891 -0.0382  0.6441  3.1469 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Rep:Ind  (Intercept) 0.005796 0.07613 
+ Ind      (Intercept) 0.016231 0.12740 
+ Residual             0.030279 0.17401 
+Number of obs: 450, groups:  Rep:Ind, 45; Ind, 15
+
+Fixed effects:
+             Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)   2.62961    0.07994 10.00000  32.894 1.59e-11 ***
+SpeciesFroth -0.08001    0.11306 10.00000  -0.708   0.4953    
+SpeciesFnigr -0.28663    0.11306 10.00000  -2.535   0.0296 *  
+SpeciesFprui -0.01049    0.11306 10.00000  -0.093   0.9279    
+SpeciesFtrif -0.19091    0.11306 10.00000  -1.689   0.1222    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) SpcsFr SpcsFn SpcsFp
+SpeciesFrth -0.707                     
+SpeciesFngr -0.707  0.500              
+SpeciesFpru -0.707  0.500  0.500       
+SpeciesFtrf -0.707  0.500  0.500  0.500
+
+
+----- LOG MODEL COMPARISON (Null vs Final; LRT) -----
+Data: spores_pairwise_log
+Models:
+m_null_log: f_null_log
+update(m_final_log, REML = FALSE): f_full_log
+                                  npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(>Chisq)  
+m_null_log                           4 -208.56 -192.13 108.28   -216.56                       
+update(m_final_log, REML = FALSE)    8 -210.57 -177.69 113.28   -226.57 10.002  4     0.0404 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+----- LOG MODEL R2 (marginal / conditional) -----
+# R2 for Mixed Models
+
+  Conditional R2: 0.530
+     Marginal R2: 0.188
+
+
+----- LOG ASSUMPTION CHECKS (model performance) -----
+[Heteroscedasticity]
+Warning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+
+[Outliers]
+OK: No outliers detected.
+- Based on the following method and threshold: cook (0.5).
+- For variable: (Whole model)
+
+
+
+----- LOG RESIDUAL NORMALITY (Shapiro-Wilk) -----
+
+
+	Shapiro-Wilk normality test
+
+data:  resid(m_final_log)
+W = 0.99508, p-value = 0.1642
+
+
+
+----- LOG ANOVA TEST (Kenward–Roger) -----
+Type III Analysis of Variance Table with Kenward-Roger's method
+         Sum Sq  Mean Sq NumDF DenDF F value Pr(>F)
+Species 0.28703 0.071758     4    10  2.3699 0.1224
+
+
+----- LOG PAIRWISE COMPARISONS (Tukey-adjusted) -----
+ contrast      estimate    SE df t.ratio p.value
+ Fyves - Froth   0.0800 0.113 10   0.708  0.9500
+ Fyves - Fnigr   0.2866 0.113 10   2.535  0.1581
+ Fyves - Fprui   0.0105 0.113 10   0.093  1.0000
+ Fyves - Ftrif   0.1909 0.113 10   1.689  0.4810
+ Froth - Fnigr   0.2066 0.113 10   1.828  0.4103
+ Froth - Fprui  -0.0695 0.113 10  -0.615  0.9694
+ Froth - Ftrif   0.1109 0.113 10   0.981  0.8579
+ Fnigr - Fprui  -0.2761 0.113 10  -2.442  0.1809
+ Fnigr - Ftrif  -0.0957 0.113 10  -0.847  0.9097
+ Fprui - Ftrif   0.1804 0.113 10   1.596  0.5311
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+
+
+
+----- LOG COMPACT LETTER DISPLAY -----
+ Species   emmean         SE df lower.CL upper.CL .group
+ Fyves   2.629610 0.07994202 10 2.451488 2.807732  a    
+ Froth   2.549601 0.07994202 10 2.371479 2.727723  a    
+ Fnigr   2.342983 0.07994202 10 2.164861 2.521105  a    
+ Fprui   2.619119 0.07994202 10 2.440997 2.797241  a    
+ Ftrif   2.438696 0.07994202 10 2.260574 2.616818  a    
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+
+
+
+----- LOG EFFECT SIZES (Hedges g) -----
+ contrast      effect.size    SE df lower.CL upper.CL
+ Fyves - Froth      0.4598 0.650 10   -0.988    1.908
+ Fyves - Fnigr      1.6472 0.652 10    0.194    3.100
+ Fyves - Fprui      0.0603 0.650 10   -1.387    1.508
+ Fyves - Ftrif      1.0971 0.651 10   -0.353    2.547
+ Froth - Fnigr      1.1874 0.651 10   -0.263    2.638
+ Froth - Fprui     -0.3995 0.650 10   -1.847    1.048
+ Froth - Ftrif      0.6373 0.650 10   -0.811    2.086
+ Fnigr - Fprui     -1.5869 0.652 10   -3.039   -0.134
+ Fnigr - Ftrif     -0.5500 0.650 10   -1.998    0.898
+ Fprui - Ftrif      1.0369 0.651 10   -0.413    2.487
+
+sigma used for effect sizes: 0.174 
+Degrees-of-freedom method: inherited from kenward-roger when re-gridding 
+Confidence level used: 0.95 
+
+
+
+----- LOG ESTIMATED MARGINAL MEANS (emmeans) -----
+ Species emmean     SE df lower.CL upper.CL
+ Fyves     2.63 0.0799 10     2.45     2.81
+ Froth     2.55 0.0799 10     2.37     2.73
+ Fnigr     2.34 0.0799 10     2.16     2.52
+ Fprui     2.62 0.0799 10     2.44     2.80
+ Ftrif     2.44 0.0799 10     2.26     2.62
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+
+
+========================
+End of log sensitivity
+========================
