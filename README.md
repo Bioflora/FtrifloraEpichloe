@@ -66,8 +66,8 @@ FtrifloraEpichloe/
 │   │                                          pg/1C_ST (known genome size, standard);             
 │   │
 │   └── scripts/
-│       ├── script_1.Rmd                       # RMarkdown: Morphological analysis of fungal endophytes.
-│       ├── script_2.Rmd                       # Rmarkdown: Visualization and editing of phylogenetic trees (raw figures).
+│       ├── script_1.Rmd                       # RMarkdown: Visualization and editing of phylogenetic trees.
+│       ├── script_2.Rmd                       # Rmarkdown: Morphological analysis of fungal endophytes.
 └
 
 ```
